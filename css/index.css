@@ -277,7 +277,7 @@ li:hover {
   justify-content: center;
   align-items: center;
   background-color: var(--edit-area-bg);
-  background-image: url("../bgIcon.png");
+  background-image: url("../img/bgIcon.png");
   background-size: auto 60%;
   background-repeat: no-repeat;
   background-position: center;

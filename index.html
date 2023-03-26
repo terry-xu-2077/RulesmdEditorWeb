@@ -7,11 +7,11 @@
     <title>Rulesmd编辑器 - Terry</title>
     <link
       rel="stylesheet"
-      href="../font-awesome-4.7.0/css/font-awesome.min.css"
+      href="css/font-awesome-4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" href="css/popDialog.css">
-    <script src="myUtility.js"></script>
+    <script src="lib/myUtility.js"></script>
     <script type="module">
       import * as INI_LIB from "./lib/myConfigParser.js";
       window.INI_LIB = INI_LIB
@@ -25,9 +25,9 @@
           <div id="editWrapper">
             <div id="iframes">
               <!-- 编辑区域 -->
-              <iframe id="editArea" src="editArea.html"></iframe>
+              <iframe id="editArea" src="html/editArea.html"></iframe>
               <!-- 预览区域 -->
-              <iframe id="previewArea" src="editArea.html"></iframe>
+              <iframe id="previewArea" src="html/editArea.html"></iframe>
             </div>
           </div>
         </div>
@@ -113,7 +113,7 @@
         <div id="barsBtn" class="fa fa-ellipsis-v"></div>
         <!-- 顶部导航 -->
         <div id="topLogo" class="ct">
-          <img class="icon" src="../appIcon/资源 1@64x-8.png" alt="" />
+          <img class="icon" src="img/appIcon/资源 1@64x-8.png" alt="" />
           <div>Rulesmd 编辑器</div>
           <div class="sep-v"></div>
         </div>
@@ -175,7 +175,7 @@
       <div id="appSettingDialog"></div>
       <div id="globalSettingDialog"></div>
     </div>
-    <script src="index.js"></script>
-    <script src="popDialog.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/popDialog.js"></script>
   </body>
 </html>
