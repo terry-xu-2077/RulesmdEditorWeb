@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="../font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/editArea.css" />
+    <link rel="stylesheet" href="css/itemEffect.css" />
+    <link rel="stylesheet" href="css/widgets.css" />
+    <script src="iconTile.js"></script>
+    <script src="myUtility.js"></script>
+  </head>
+  <body>
+    <iframe
+      src="widgets.html"
+      frameborder="0"
+      style="display: none"
+      onload="load_EDW(this)"
+    ></iframe>
+    <div id="active-bg">
+      <ul></ul>
+    </div>
+    <div class="wrapper">
+      <div id="editTop" class="ct">
+        <!-- 编辑区顶部 -->
+        <div id="itemBox">
+          <div id="bgText"></div>
+          <div id="floatInfo">
+            <div class="icon ct">
+              <div id="noIcon" class="fa fa-file-photo-o"></div>
+              <i id="itemIcon"></i>
+              <input
+                type="checkbox"
+                id="fixBtn"
+                onclick="EDIT_AREA_OBJ.setFix(this)"
+              />
+              <div class="edit-tipBox">
+                <span class="edit-tooltip">固定这个页面</span>
+              </div>
+            </div>
+            <div id="itemName">
+              <div id="n1"></div>
+              <div id="n2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="editBottom">
+        <div id="editList-1"></div>
+        <div id="editList-2"></div>
+        <div id="editList-3"></div>
+      </div>
+    </div>
+    <script src="editArea.js"></script>
+  </body>
+</html>

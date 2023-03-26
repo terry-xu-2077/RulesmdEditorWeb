@@ -1,0 +1,499 @@
+@import url("public.css");
+:root {
+  /* 定义长宽 */
+  --topLine_h: 56px;
+  --leftMenu: 180px;
+  --pad: 10px;
+
+  --top-f-R: 390px;
+  --search-unit: 200px;
+  --barsBtn_w: 24px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(31, 30, 30);
+  color: white;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border-radius: 10px;
+  overflow: hidden;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  /* position: relative; */
+  width: 100%;
+  right: 0;
+}
+li {
+  color: rgba(0, 0, 0, 0.685);
+  list-style-type: none;
+  height: calc(var(--btn_h) - 8px);
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  display: flex;
+  font-size: 14px;
+  padding: 0 10px 0 10px;
+  background-color: rgba(237, 237, 237, 0.637);
+  cursor: pointer;
+  user-select: none;
+}
+li:not(:last-child) {
+  border-bottom: 1px solid rgba(71, 71, 71, 0.6);
+}
+li:hover {
+  color: white;
+  /* border-bottom: 1px solid rgba(172, 172, 172, 0.4); */
+  background-color: var(--mid-gray-bg);
+}
+.font-icon {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.sep-v {
+  width: 1px;
+  height: 80%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.li-click {
+  color: white;
+  /* border-bottom: 2px solid var(--active_color); */
+  background-color: var(--mid-gray-bg);
+}
+.fold-m1-box {
+  width: 100%;
+}
+.fold-m1 {
+  /* box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.2); */
+  box-sizing: border-box;
+  border: 1px solid rgb(122, 122, 122);
+  /* border-radius: 8px; */
+  background-image: var(--liner_grad_1);
+  color: rgb(203, 203, 203);
+  height: var(--btn_h);
+  width: 120px;
+  margin: 0;
+  padding-top: 0px;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.08s ease-in;
+  white-space: pre;
+}
+.fold-m1 .title {
+  width: 50%;
+}
+.fold-m1 .icon {
+  width: 30px;
+}
+.fold-m1:hover {
+  padding-top: 4px;
+  border-bottom: 2px solid var(--hover_color);
+  color: rgb(255, 255, 255);
+  background-image: var(--liner_grad_3);
+}
+
+/* “收起” */
+.fold-m1-box .fold-collapse {
+  /* box-shadow: 0px 20px 30px 10px rgba(0, 0, 0, 0.4); */
+  background-image: var(--liner_grad_4);
+}
+/* 隐藏内容区域 */
+.fm-child {
+  display: none;
+}
+.f-w {
+  width: 100%;
+}
+#wp1 {
+  height: 100%;
+}
+#wp2 {
+  height: calc(100% - var(--topLine_h));
+  display: flex;
+}
+#topLine {
+  height: var(--topLine_h);
+  display: flex;
+  justify-content: space-between;
+  background-image: var(--top-bg_grad);
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+#topBtns {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 0;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+#topBtns::-webkit-scrollbar {
+  background: none;
+}
+
+#topLeft {
+  left: 0;
+  width: 100%;
+  height: var(--topLine_h);
+  flex-grow: 0;
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+#topRight {
+  height: var(--topLine_h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-grow: 0;
+  flex-direction: row;
+  left: 0;
+  margin-right: var(--pad);
+  transition: none;
+}
+#topLogo {
+  width: var(--leftMenu);
+  min-width: var(--leftMenu);
+  height: 100%;
+}
+#topLogo .icon {
+  height: 80%;
+  margin-right: 4px;
+}
+#topLogo .sep-v {
+  position: fixed;
+  left: var(--leftMenu);
+  height: var(--topLine_h);
+}
+
+/* #unitFoldBox ::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+} */
+
+#unitFoldBox {
+  /* top: 20px; */
+  width: var(--leftMenu);
+  height: calc(100% - var(--topLine_h));
+  bottom: var(--topLine_h);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--unitFoldBox_bg);
+  position: absolute;
+  transition: 0.16s ease-in;
+  left: calc(var(--leftMenu) * -1);
+}
+
+#unitFoldBox #leftTop {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  justify-items: center;
+  align-items: center;
+}
+#unitFoldBox #sidePullBtn {
+  font-size: 12px;
+  color: var(--edit-color);
+  position: absolute;
+  width: 20px;
+  height: 200px;
+  right: -20px;
+  top: 50%;
+  transform: translate(0, -50%);
+  background-color: rgb(34, 34, 34);
+  border-radius: 0 20px 20px 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-right: 1px solid rgba(255, 255, 255, 0.42);
+  user-select: none;
+  cursor: pointer;
+  transition: 0.08s ease-in;
+}
+#unitFoldBox #sidePullBtn:hover {
+  color: white;
+  background-image: var(--liner_grad_3);
+  border-right: 2px solid var(--hover_color);
+}
+
+#unitFoldBox #sidePullBtn .fa {
+  font-size: 16px;
+  height: 22px;
+}
+
+#unitFoldBox #fold-all {
+  transition: 0.08s ease-in;
+  box-sizing: border-box;
+  border: 1px solid rgba(122, 122, 122, 0);
+  background-image: var(--liner_grad_2);
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  width: var(--leftMenu);
+  height: 20px;
+}
+#unitFoldBox #fold-all:hover {
+  background-image: var(--liner_grad_3);
+  border: 2px solid var(--hover_color);
+}
+#unitFoldBox #fold-all:active {
+  background-image: var(--liner_grad_4);
+}
+
+#unitFoldBox #foldList {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#editBox {
+  margin-left: 0px;
+  float: right;
+  width: 100%;
+  flex: 1;
+}
+#editBg {
+  position: absolute;
+  height: calc(100% - var(--topLine_h));
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--edit-area-bg);
+  background-image: url("../bgIcon.png");
+  background-size: auto 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode: soft-light;
+  opacity: 0.5;
+}
+#editWrapper {
+  position: absolute;
+  height: calc(100% - var(--topLine_h));
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#editWrapper #iframes {
+  transition: 0.08s ease-in;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#editSplitBar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  /* background-color: rgba(255, 255, 255, 0.34); */
+}
+
+#editSplitBar .bar {
+  -webkit-user-drag: none;
+  cursor: w-resize;
+  position: absolute;
+  width: 16px;
+  height: 60px;
+  pointer-events: all;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#editSplitBar .bar-icon {
+  -webkit-user-drag: none;
+  pointer-events: none;
+  width: 6px;
+  height: 80%;
+  border-radius: 3px;
+  display: flex;
+  position: absolute;
+}
+#editSplitBar .bar-icon::after {
+  align-self: center;
+  content: " \f142";
+  font-size: 22px;
+  font-family: "FontAwesome";
+  color: rgba(255, 255, 255, 0.162);
+  transform: scale(1, 1.4);
+}
+#editSplitBar .edit-tipBox {
+  transition: all 0.1s ease;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+}
+#editSplitBar .edit-tooltip {
+  position: absolute;
+  width: 160px;
+  height: 14px;
+  background-color: rgb(45, 45, 45);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  z-index: 1;
+  top: 10px;
+  right: 200%;
+  font-size: 14px;
+  word-break: break-word;
+  white-space: pre-line;
+  line-height: 14px;
+}
+#editSplitBar .edit-tooltip::after {
+  content: "";
+  position: absolute;
+  right: -12px;
+  top: 34%;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgb(45, 45, 45);
+}
+#editSplitBar:hover .edit-tipBox {
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
+}
+#editArea {
+  display: block;
+  height: 100%;
+  width: 50%;
+  border: none;
+}
+#previewArea {
+  display: block;
+  height: 100%;
+  width: 50%;
+  border: none;
+}
+
+#search_unit {
+  box-sizing: border-box;
+  border: 1px solid rgb(36, 36, 36);
+  width: calc(100% - 20px);
+  min-width: 60px;
+  height: var(--btn_h);
+  max-width: 300px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 15px;
+  background-image: var(--liner_grad_5);
+  margin-left: var(--pad);
+}
+#search_unit div {
+  margin-right: 4px;
+}
+#search_unit .fa {
+  opacity: 0.5;
+  font-size: 18px;
+}
+#search_unit input[type="text"] {
+  height: 100%;
+  width: 100%;
+  color: var(--hover_color_2);
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+#search_unit input[type="text"]:focus {
+  color: white;
+}
+#search_unit .dropdown {
+  display: none;
+  position: absolute;
+  width: var(--search-unit);
+  list-style: none;
+  left: calc(var(--leftMenu) + 10px);
+  /* top: calc(var(--topLine_h) - 10px); */
+  bottom: calc(var(--topLine_h) - 10px);
+  background-color: rgb(50, 50, 50);
+  box-sizing: border-box;
+  border: 2px solid var(--hover_edge);
+  box-shadow: var(--drop-shadow-2);
+}
+#search_unit input[type="text"]:focus + .dropdown {
+  display: block;
+}
+#barsBtn {
+  position: absolute;
+  height: var(--topLine_h);
+  width: var(--barsBtn_w);
+  right: 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  background-image: var(--liner_grad_1);
+  border-left: 1px solid rgba(31, 30, 30, 0.68);
+  transition: 0.12s ease-in;
+  color: rgba(255, 255, 255, 0.47);
+  cursor: pointer;
+  right: calc(var(--barsBtn_w) * -1);
+}
+#barsBtn:hover {
+  color: rgb(255, 255, 255);
+  background-image: var(--liner_grad_3);
+}
+#barsBtn:active {
+  background-image: var(--liner_grad_4);
+}
+
+#foldList li .name {
+  text-overflow: ellipsis;
+  height: 100%;
+  overflow: hidden;
+  text-align: left;
+}
+
+@media only screen and (max-width: 880px) {
+  .btn {
+    border-radius: 0;
+    padding: 0;
+    height: calc(var(--btn_h) * 1.2);
+  }
+  .btn:not(:last-child) {
+    margin-right: 0;
+  }
+  #barsBtn {
+    right: 0;
+  }
+  #topRight {
+    flex-direction: column;
+    position: absolute;
+    width: var(--btn_w);
+    height: calc(var(--btn_h) * 1.2 * 4);
+    left: calc(100% - var(--btn_w) - var(--barsBtn_w));
+    margin: 0;
+    bottom: calc(var(--btn_h) * 1.2 * -4);
+    transition: 0.12s ease-in;
+  }
+  #topLeft {
+    width: calc(100% - var(--barsBtn_w));
+  }
+}

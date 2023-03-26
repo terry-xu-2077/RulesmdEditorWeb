@@ -1,0 +1,52 @@
+#active-bg {
+  position: absolute;
+  width: calc(100% + 30px);
+  min-width: 600px;
+  height: 60px;
+  left: -30px;
+  display: flex;
+  overflow: hidden;
+  transition: 0.5s ease;
+  // opacity: 0;
+  background-color: var(--edit-op-va_bg);
+  // box-sizing: border-box;
+  // border: 1px solid;
+  // border-color: var(--edit-color) transparent var(--edit-color) transparent;
+}
+#active-bg ul {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  gap: 5px;
+}
+#active-bg li {
+  list-style-type: none;
+  border-radius: 50%;
+  background: var(--hover_color);
+  opacity: 0;
+  animation: MOVE_UP 3s infinite -1s linear;
+}
+@for $i from 1 to 21 {
+  #active-bg li:nth-child(#{$i}) {
+    $s: random(5) * 5 + 5;
+    width: #{$s}px;
+    height: #{$s}px;
+    //filter: blur(#{$s/10}px);
+    animation-duration: #{random(2000) / 500 + 2}s;
+    animation-delay: #{random(1000) / 500 + 1}s;
+  }
+}
+@keyframes MOVE_UP {
+  0% {
+    transform: translate(0, 40px);
+  }
+  20% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(0, -40px);
+    opacity: 0;
+  }
+}

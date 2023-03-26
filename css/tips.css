@@ -1,0 +1,159 @@
+:root {
+  --tip_w: 340px;
+  --tip_h: 360px;
+}
+#tips {
+  position: absolute;
+  right: 54%;
+  top: 50%;
+  /* left: calc(var(--tip_w) * -1.5); */
+  width: var(--tip_w);
+  height: var(--tip_h);
+  color: rgba(255, 255, 255, 0.918);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.15s ease;
+  opacity: 0;
+}
+#tips #bg {
+  background-color: rgba(12, 29, 61, 1);
+
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+}
+
+.tips-top::before {
+  --tri_size: 16px;
+  position: absolute;
+  border: var(--tri_size) solid;
+  border-color: transparent transparent var(--light_color) transparent;
+  content: "";
+  transform: scale(0.8, 1);
+  top: calc(var(--tri_size) * -2);
+  right: calc(var(--tri_size) * 2 + 30px);
+}
+.tips-top::after {
+  --tri_size: 12px;
+  position: absolute;
+  border: var(--tri_size) solid;
+  border-color: transparent transparent rgba(12, 29, 61, 1) transparent;
+  content: "";
+  transform: scale(0.8, 1);
+  top: calc(var(--tri_size) * -2);
+  right: calc(var(--tri_size) * 2 + 42px);
+}
+
+.tips-top {
+  border: 2px solid;
+  border-color: var(--light_color) var(--mid-gray-bg) var(--mid-gray-bg)
+    var(--mid-gray-bg);
+}
+
+.tips-right::before {
+  --tri_size: 16px;
+  position: absolute;
+  border: var(--tri_size) solid;
+  border-color: transparent transparent transparent var(--light_color);
+  content: "";
+  transform: scale(0.8, 1);
+  top: calc(var(--tri_size) * -2);
+  right: calc(var(--tri_size) * 2 + 30px);
+}
+.tips-right::after {
+  --tri_size: 12px;
+  position: absolute;
+  border: var(--tri_size) solid;
+  border-color: transparent transparent transparent rgba(12, 29, 61, 1);
+  content: "";
+  transform: scale(0.8, 1);
+  top: calc(var(--tri_size) * -2);
+  right: calc(var(--tri_size) * 2 + 42px);
+}
+
+.tips-bottom {
+  border: 2px solid;
+  border-color: var(--mid-gray-bg) var(--mid-gray-bg) var(--light_color)
+    var(--mid-gray-bg);
+}
+
+.tips-bottom::before {
+  --tri_size: 16px;
+  position: absolute;
+  border: var(--tri_size) solid;
+  border-color: var(--light_color) transparent transparent transparent;
+  content: "";
+  transform: scale(0.8, 1);
+  bottom: calc(var(--tri_size) * -2);
+  right: calc(var(--tri_size) * 2 + 30px);
+}
+.tips-bottom::after {
+  --tri_size: 12px;
+  position: absolute;
+  border: var(--tri_size) solid;
+  border-color: rgba(12, 29, 61, 1) transparent transparent transparent;
+  content: "";
+  transform: scale(0.8, 1);
+  bottom: calc(var(--tri_size) * -2);
+  right: calc(var(--tri_size) * 2 + 42px);
+}
+
+#tips #hiddenBtn {
+  opacity: 0.6;
+  width: 20px;
+  height: 18px;
+  background-color: var(--mid-gray-bg);
+  transition: 0.1s ease;
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#tips #hiddenBtn:hover {
+  opacity: 1;
+  background-color: var(--light_color_2);
+}
+
+#tips #info {
+  color: rgba(255, 255, 255, 0.815);
+  position: absolute;
+  top: 32px;
+  left: 30px;
+  width: calc(var(--tip_w) - 40px);
+  height: calc(var(--tip_h) - 54px);
+  font-size: 13px;
+  white-space: pre-line;
+  line-height: 21px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#tips #option {
+  color: var(--hover_color);
+  position: absolute;
+  left: 7px;
+  top: 2px;
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#tips #option .a {
+  font-size: 18px;
+}
+#tips #option .b {
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+#tips #option::before {
+  font-size: 19px;
+  content: "\f059  ";
+  font-family: "FontAwesome";
+  white-space: pre;
+  color: var(--light_color);
+}

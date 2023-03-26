@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>小部件</title>
+    <link
+      rel="stylesheet"
+      href="../font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/widgets.css" />
+    <script src="myUtility.js"></script>
+  </head>
+  <style>
+    body {
+      background-color: rgb(36, 36, 36);
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <body style="visibility: hidden">
+    <div class="test-wrapper">
+      <!-- 输入框 -->
+      <div class="edit-wg-default">
+        <input
+          class="edit-text"
+          type="text"
+          placeholder="空"
+          onchange="EDW_API.text.change(this)"
+        />
+        <div class="edit-tipBox">
+          <span class="edit-tooltip">提示文本</span>
+        </div>
+        <button
+          class="resetBtn"
+          onclick="EDW_API.text.resetValue(this)"
+        ></button>
+      </div>
+
+      <!-- 滑块开关 yes/no true/false -->
+      <div class="edit-wg-check">
+        <input
+          type="checkbox"
+          class="wg-check"
+          data-value="true"
+          checked="true"
+          onclick="EDW_API.check.click(this)"
+        />
+        <div class="edit-tipBox">
+          <span class="edit-tooltip">提示文本</span>
+        </div>
+        <button
+          class="resetBtn"
+          onclick="EDW_API.check.resetValue(this)"
+        ></button>
+      </div>
+
+      <!-- 下拉列表 单选情况-->
+      <div class="edit-wg-drop">
+        <button
+          type="button"
+          class="dropbtn"
+          data-value=""
+          data-select="-1"
+          onclick="EDW_API.drop.click(this)"
+        >
+          <div class="text">下拉菜单</div>
+        </button>
+        <div class="droplist">
+          <div
+            class="item"
+            data-id="-1"
+            data-value=""
+            style="display: none"
+            onclick="EDW_API.drop.itemClick(this)"
+          >
+            选项1
+          </div>
+        </div>
+        <div class="edit-tipBox">
+          <span class="edit-tooltip">提示文本</span>
+        </div>
+        <button
+          class="resetBtn"
+          onclick="EDW_API.drop.resetValue(this)"
+        ></button>
+      </div>
+
+      <!-- 数值滑块 血量、金钱-->
+      <div class="edit-wg-slider">
+        <input
+          type="range"
+          min="0"
+          max="100"
+          step="1"
+          class="wg-slider"
+          value="0"
+          oninput="EDW_API.slider.change(this)"
+        />
+        <input
+          type="number"
+          class="wg-number"
+          onchange="EDW_API.slider.numChange(this)"
+          value="0"
+        />
+        <div class="edit-tipBox">
+          <span class="edit-tooltip">提示文本</span>
+        </div>
+        <button
+          class="resetBtn"
+          onclick="EDW_API.slider.resetValue(this)"
+        ></button>
+      </div>
+
+      <!-- 弹出按钮：选择国家 -->
+      <div class="edit-wg-sideSelect">
+        <button
+          type="button"
+          class="sideBtn"
+          data-title="选择国家"
+          onclick="EDW_API.side.open(this)"
+          data-value="Americans,Alliance,French,Germans,British,Africans,Arabs,Confederation,Russians,YuriCountry"
+        >
+          <div class="text">
+            美国,韩国,法国,德国,英国,利比亚,伊拉克,古巴,苏联,尤里
+          </div>
+        </button>
+        <div class="edit-tipBox">
+          <span class="edit-tooltip">提示文本</span>
+        </div>
+        <button
+          class="resetBtn"
+          onclick="EDW_API.side.resetValue(this)"
+        ></button>
+      </div>
+
+      <!-- 弹出按钮：多选 -->
+      <div class="edit-wg-multiSelect">
+        <button
+          type="button"
+          class="multiBtn"
+          data-option="VeteranAbilities"
+          data-title="1级能力"
+          onclick="EDW_API.multi.open(this)"
+          data-value="FIREPOWER"
+        >
+          <div class="text" onchange="EDW_API.change.getEvent(this)">
+            FIREPOWER
+          </div>
+        </button>
+        <div class="edit-tipBox">
+          <span class="edit-tooltip">提示文本</span>
+        </div>
+        <button
+          class="resetBtn"
+          onclick="EDW_API.multi.resetValue(this)"
+        ></button>
+      </div>
+    </div>
+
+    <!-- 弹出窗口 国家 -->
+    <div id="edit-wg-side-select-win">
+      <p class="edit-side-title">选择国家</p>
+      <div class="wg-side-wrapper">
+        <input
+          type="checkbox"
+          class="ed-side-check s-1"
+          checked="false"
+          data-value="Americans"
+          data-name="美国"
+        />
+        <input
+          type="checkbox"
+          class="ed-side-check s-2"
+          checked="false"
+          data-value="Alliance"
+          data-name="韩国"
+        />
+        <input
+          type="checkbox"
+          class="ed-side-check s-3"
+          checked="false"
+          data-value="French"
+          data-name="法国"
+        />
+        <input
+          type="checkbox"
+          class="ed-side-check s-4"
+          checked="false"
+          data-value="Germans"
+          data-name="德国"
+        />
+        <input
+          type="checkbox"
+          class="ed-side-check s-5"
+          checked="false"
+          data-value="British"
+          data-name="英国"
+        />
+        <input
+          type="checkbox"
+          class="ed-side-check s-6"
+          checked="false"
+          data-value="Africans"
+          data-name="利比亚"
+        />
+        <input
+          type="checkbox"
+          class="ed-side-check s-7"
+          checked="false"
+          data-value="Arabs"
+          data-name="伊拉克"
+        />
+        <input
+          type="checkbox"
+          class="ed-side-check s-8"
+          checked="false"
+          data-value="Confederation"
+          data-name="古巴"
+        />
+        <input
+          type="checkbox"
+          class="ed-side-check s-9"
+          checked="false"
+          data-value="Russians"
+          data-name="苏联"
+        />
+        <input
+          type="checkbox"
+          class="ed-side-check s-10"
+          checked="false"
+          data-value="YuriCountry"
+          data-name="尤里"
+        />
+      </div>
+      <div class="btns">
+        <button
+          type="button"
+          class="edit-side-btn-cancle"
+          onclick="EDW_API.side.submit(false)"
+        >
+          取消
+        </button>
+        <button
+          type="button"
+          class="edit-side-btn-ok"
+          onclick="EDW_API.side.submit(true)"
+        >
+          确定
+        </button>
+      </div>
+    </div>
+
+    <!-- 弹出窗口 多选 -->
+    <div id="edit-wg-multi-select-win">
+      <p class="edit-multi-title">多选窗口</p>
+      <div class="wg-multi-wrapper">
+        <input
+          type="checkbox"
+          style="display: none"
+          class="ed-multi-check"
+          checked="false"
+          data-id="-1"
+          data-value="01"
+          data-desc="选项1"
+          onclick="EDW_API.multi.itemClick(this)"
+        />
+      </div>
+      <div class="btns">
+        <button
+          type="button"
+          class="edit-multi-btn-cancle"
+          onclick="EDW_API.multi.submit(false)"
+        >
+          取消
+        </button>
+        <button
+          type="button"
+          class="edit-multi-btn-ok"
+          onclick="EDW_API.multi.submit(true)"
+        >
+          确定
+        </button>
+      </div>
+    </div>
+    <script src="widgets.js"></script>
+  </body>
+</html>

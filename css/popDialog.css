@@ -1,0 +1,175 @@
+@charset "UTF-8";
+:root {
+  --ed-wg-main-color: rgb(2, 189, 158);
+}
+
+.dialog-open-in {
+  transform: scale(0.5);
+}
+
+.dialog-open-out {
+  transform: scale(1);
+  pointer-events: auto;
+  -webkit-animation: dialog_win_out 0.5s;
+          animation: dialog_win_out 0.5s;
+  opacity: 1;
+}
+
+@-webkit-keyframes dialog_win_out {
+  0% {
+    transform: scale(0.5);
+  }
+  30% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes dialog_win_out {
+  0% {
+    transform: scale(0.5);
+  }
+  30% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.dialog-close-in {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.dialog-close-out {
+  transform: scale(0.5);
+  opacity: 0;
+  pointer-events: none;
+}
+
+::-webkit-scrollbar {
+  width: 14px; /* 纵向滚动条 宽度 */
+  height: 14px; /* 横向滚动条 高度 */
+  background: rgba(30, 63, 133, 0.3); /* 整体背景 */
+  border-radius: 7px; /* 整体 圆角 */
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 7px; /* 整体 圆角 */
+  /* background: rgba(40, 40, 40, 0.6); */
+  background-image: linear-gradient(90deg, rgba(94, 94, 94, 0.6), rgba(52, 52, 52, 0.3));
+  box-sizing: border-box;
+  border: 2px solid rgba(156, 156, 156, 0.5);
+  position: absolute;
+}
+
+#saveDialog .saveUrl, #saveDialog .options, #popDialogGroup [id*=Dialog] .wrapper, #popDialogGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#saveDialog .saveUrl {
+  transition: all 0.2s ease;
+}
+
+#popDialogGroup {
+  transition: all 0.3s ease;
+}
+
+#popDialogGroup {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+}
+
+.dialog-mask-show {
+  pointer-events: all;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.dialog-mask-hidden {
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#popDialogGroup [id*=Dialog] {
+  visibility: hidden;
+  position: relative;
+  white-space: pre;
+  background-color: rgb(65, 188, 188);
+  border-radius: 5px;
+  border: 2px solid rgba(101, 119, 179, 0.336);
+  box-shadow: 0px 8px 20px 10px rgba(0, 0, 0, 0.4);
+  background-color: rgb(41, 41, 41);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+}
+#popDialogGroup [id*=Dialog] .title {
+  width: 100%;
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.516);
+}
+#popDialogGroup [id*=Dialog] .title::before {
+  content: "\f0c7  ";
+  font-family: "FontAwesome";
+  font-size: 32px;
+  white-space: pre;
+}
+#popDialogGroup [id*=Dialog] .light-word {
+  color: rgb(253, 126, 158);
+}
+#popDialogGroup [id*=Dialog] .wrapper {
+  border-radius: 5px;
+  border: 2px solid rgba(101, 119, 179, 0.336);
+  flex-direction: column;
+  width: 100%;
+  height: 160px;
+}
+#popDialogGroup [id*=Dialog] .btn {
+  right: 0;
+  position: absolute;
+  bottom: 26px;
+  right: 18px;
+}
+
+#saveDialog {
+  height: 280px;
+  width: 440px;
+}
+#saveDialog .desc {
+  color: rgba(255, 255, 255, 0.712);
+  margin-bottom: 12px;
+  left: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+#saveDialog .options {
+  width: 100%;
+  height: 100px;
+  flex-direction: column;
+  gap: 8px;
+}
+#saveDialog .saveUrl {
+  -webkit-appearance: none;
+  font-size: 14px;
+  height: 24px;
+  width: calc(100% - 100px);
+  color: var(--ed-wg-main-color);
+  border: 2px solid rgba(101, 119, 179, 0.336);
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+#saveDialog .saveUrl:hover {
+  color: rgb(32, 39, 65);
+  background-color: var(--ed-wg-main-color);
+}/*# sourceMappingURL=popDialog.css.map */

@@ -1,0 +1,878 @@
+$main-color: rgb(2, 189, 158);
+$main-input: rgb(135, 207, 255);
+
+$bg-a: rgba(205, 205, 205, 0.377);
+$bg-c: rgba(18, 20, 35, 0.87);
+$font-b: rgb(41, 41, 41);
+$font-c: rgba(255, 255, 255, 0.687);
+$font-d: rgb(249, 255, 70);
+$font-e: rgb(255, 136, 217);
+$bg-bg: rgb(32, 39, 65);
+$win-bg: rgb(41, 41, 41);
+$wg-h: 26px;
+$wg-w: 220px;
+$wg-w-long: 220px;
+$wg-bor: 2px solid rgba(101, 119, 179, 0.336);
+$wg-bor-a: 2px solid rgba(255, 255, 255, 0.311);
+$wg-bor-b: 2px solid rgb(255, 255, 255);
+$wg-bor-r: 5px;
+$wg-tip-bg: rgb(175, 200, 255);
+$wg-bg-gray: rgba(32, 62, 126, 0.842);
+$drop-shadow-0: 0px 8px 20px 10px rgba(0, 0, 0, 0.4);
+$drop-shadow-1: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+$liner-bg-a: linear-gradient(
+  0deg,
+  #{$bg-bg} 30%,
+  #{$bg-c} 26%,
+  #{$bg-c} 74%,
+  #{$bg-bg} 70%
+);
+
+:root {
+  --ed-wg-main-color: #{$main-color};
+  --ed-wg-check-on-bg: linear-gradient(
+    90deg,
+    #{darken($main-color, 10)} 60%,
+    #{lighten($main-color, 20)} 80%,
+    #{darken($main-color, 10)} 90%
+  );
+  --ed-wg-pre-main-light: #{mix($main-color, rgb(170, 170, 170), 16%)};
+  --ed-wg-pre-main-color: #{mix($main-color, rgb(97, 97, 97), 16%)};
+}
+
+::-webkit-scrollbar {
+  width: 14px; /* 纵向滚动条 宽度 */
+  height: 14px; /* 横向滚动条 高度 */
+  background: rgba(30, 63, 133, 0.3); /* 整体背景 */
+  border-radius: 7px; /* 整体 圆角 */
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 7px; /* 整体 圆角 */
+  /* background: rgba(40, 40, 40, 0.6); */
+  background-image: linear-gradient(
+    90deg,
+    rgba(94, 94, 94, 0.6),
+    rgba(52, 52, 52, 0.3)
+  );
+  box-sizing: border-box;
+  border: 2px solid rgba(156, 156, 156, 0.5);
+  position: absolute;
+}
+
+%center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+%ease-0 {
+  transition: all 0.1s ease;
+}
+%ease-1 {
+  transition: all 0.2s ease;
+}
+%ease-2 {
+  transition: all 0.3s ease;
+}
+%icon-right {
+  color: var(--ed-wg-main-color);
+  font-family: "FontAwesome";
+  white-space: pre;
+  font-size: 16px;
+  position: absolute;
+  top: 5px;
+  right: 8px;
+}
+
+[class*="edit-wg"] {
+  position: relative;
+  outline: 2px solid rgba(255, 255, 255, 0);
+  border-radius: #{$wg-bor-r};
+  @extend %ease-1;
+  &:hover {
+    outline: 2px solid #{$main-input};
+    border-radius: #{$wg-bor-r};
+    box-shadow: 0 0 10px 2px rgb(135, 207, 255);
+    // filter: drop-shadow(0 0 4px rgb(135, 207, 255));
+  }
+  .resetBtn {
+    -webkit-appearance: none;
+    $w: $wg-h * 1.4;
+    top: 0;
+    right: #{$w * -1 - 50px};
+    position: absolute;
+    width: #{$w};
+    height: 100%;
+    color: white;
+    padding: 0;
+    margin: 0;
+    background: none;
+    border: none;
+    border-radius: #{$wg-bor-r};
+    cursor: pointer;
+    white-space: nowrap;
+    @extend %ease-0;
+    border: #{$wg-bor};
+    pointer-events: none;
+    opacity: 0;
+    &:hover {
+      background-color: var(--ed-wg-main-color);
+    }
+    &:active {
+      background-color: #{$bg-bg};
+    }
+    &:hover::before {
+      opacity: 1;
+    }
+    &:hover::after {
+      color: white;
+    }
+    &::before {
+      opacity: 0;
+      height: 100%;
+      width: 50%;
+      color: rgba(255, 255, 255, 0.6);
+      content: "还原";
+      position: absolute;
+      right: #{$w * 1.5};
+      @extend %ease-0;
+    }
+    &::after {
+      color: rgba(255, 255, 255, 0.386);
+      font-family: "FontAwesome";
+      white-space: pre;
+      font-size: 16px;
+      @extend %center;
+      content: "\f0e2";
+      @extend %ease-0;
+    }
+  }
+  .resetBtn-show {
+    pointer-events: all;
+    opacity: 1;
+  }
+}
+
+.test-wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 100%;
+  width: 100%;
+}
+
+.edit-tipBox {
+  position: relative;
+  width: 0;
+  height: 100%;
+  // visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  @extend %ease-0;
+  .edit-tooltip {
+    position: absolute;
+    width: #{$wg-w-long * 1.4};
+    height: #{$wg-w-long / 3};
+    background-color: #{$wg-tip-bg};
+    color: #{$font-b};
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    z-index: 1;
+    bottom: 160%;
+    left: #{$wg-w-long / 2 - $wg-w-long * 1.4 / 2 - 10px};
+    font-size: 14px;
+    word-break: break-word;
+    white-space: pre-line;
+    line-height: 20px;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #{$wg-tip-bg} transparent transparent transparent;
+    }
+  }
+}
+%tooltipOffset {
+  .edit-tooltip {
+    bottom: 240%;
+  }
+}
+%tooltipShow {
+  &:hover .edit-tipBox {
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+  }
+}
+
+.edit-wg-default {
+  width: #{$wg-w-long};
+  height: #{$wg-h};
+  transition: 0.08s ease-in;
+  @extend %center;
+  .edit-text {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    right: 0;
+    font-size: 15px;
+    color: #{$main-input};
+    white-space: nowrap;
+    padding-left: 6px;
+    border: none;
+    outline: none;
+    background: none;
+    box-sizing: border-box;
+    border-radius: #{$wg-bor-r};
+    border: #{$wg-bor};
+    background-color: #{$bg-bg};
+    &:focus {
+      color: white;
+      background: #{$wg-bg-gray};
+    }
+  }
+}
+
+.edit-wg-check {
+  position: relative;
+  width: #{$wg-w};
+  height: #{$wg-h};
+  .wg-check {
+    -webkit-appearance: none;
+    position: absolute;
+    background-color: #{$bg-c};
+    background: $liner-bg-a;
+    height: 100%;
+    width: 100%;
+    border-radius: #{$wg-bor-r};
+    box-sizing: border-box;
+    border: #{$wg-bor};
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+
+    &::before {
+      // font-family: "FontAwesome";
+      @extend %center;
+      position: absolute;
+      height: #{$wg-h - 4};
+      width: #{$wg-w / 2 - 20};
+      border-radius: #{$wg-bor-r - 1};
+      box-sizing: border-box;
+      border: #{$wg-bor-a};
+      @extend %ease-1;
+      color: rgba(255, 255, 255, 0.598);
+      content: "OFF 关";
+      left: 0px;
+      background-color: #{$bg-a};
+      background: linear-gradient(
+        90deg,
+        rgb(75, 75, 75) 10%,
+        rgb(165, 165, 165) 20%,
+        rgb(75, 75, 75) 60%
+      );
+      // opacity: 1;
+    }
+    &:checked:before {
+      // opacity: 1;
+      color: rgba(255, 255, 255, 0.781);
+      content: "ON 开";
+      left: #{$wg-w / 2 - 4 + 20};
+      background-color: var(--ed-wg-main-color);
+      background: var(--ed-wg-check-on-bg);
+    }
+  }
+}
+
+.edit-wg-drop {
+  @extend %tooltipOffset;
+  position: relative;
+  display: inline-block;
+  color: white;
+  height: #{$wg-h};
+  width: #{$wg-w};
+  &:hover .dropbtn {
+    background-color: var(--ed-wg-main-color);
+  }
+  &:hover .dropbtn .text::after {
+    color: white;
+  }
+  .dropbtn {
+    position: relative;
+    .text {
+      width: #{$wg-w - 36};
+      padding-left: 6px;
+      overflow: hidden;
+      &::after {
+        content: " \f107";
+        @extend %icon-right;
+        font-size: 22px;
+        top: 0px;
+      }
+    }
+
+    color: white;
+    background-color: #{$bg-bg};
+    border: #{$wg-bor};
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    border-radius: #{$wg-bor-r};
+    white-space: nowrap;
+    overflow: hidden;
+    @extend %ease-1;
+  }
+  .droplist {
+    pointer-events: none;
+    opacity: 0;
+    position: relative;
+    width: #{$wg-w-long};
+    border: #{$wg-bor};
+    border-radius: #{$wg-bor-r};
+    background-color: #{$bg-bg};
+    overflow: hidden;
+    box-shadow: #{$drop-shadow-1};
+    z-index: 1;
+    @extend %ease-0;
+  }
+  .item {
+    cursor: pointer;
+    background-color: rgba(90, 90, 90, 0.83);
+    height: #{$wg-h};
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
+    padding-left: 4px;
+    font-size: 13px;
+    white-space: nowrap;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(172, 172, 172, 0.5);
+    }
+    &:hover {
+      background-color: var(--ed-wg-main-color);
+    }
+  }
+}
+.edit-wg-slider {
+  $num-w: 50px;
+  width: #{$wg-w-long};
+  height: #{$wg-h};
+  border-radius: #{$wg-bor-r};
+  background-color: #{$bg-c};
+  background: $liner-bg-a;
+  box-sizing: border-box;
+  border: #{$wg-bor};
+  display: flex;
+
+  .wg-slider {
+    -webkit-appearance: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    width: #{$wg-w-long - $num-w};
+    height: 100%;
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      border-radius: 5px;
+      height: #{$wg-h - 4};
+      width: 16px;
+      background: var(--ed-wg-main-color);
+      cursor: e-resize;
+      border-radius: #{$wg-bor-r - 1};
+      box-sizing: border-box;
+      border: 2px solid rgba(255, 255, 255, 0.64);
+    }
+  }
+  .wg-number {
+    width: #{$num-w - 4};
+    height: #{$wg-h - 4};
+    background-color: #{$bg-bg};
+    color: #{$main-input};
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    text-align: center;
+    box-sizing: border-box;
+    border-left: #{$wg-bor};
+    @extend %ease-1;
+    @extend %center;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+    &:focus {
+      color: white;
+      border-radius: 3px;
+      background: #{$wg-bg-gray};
+    }
+  }
+}
+
+// -------------- 窗口弹出动画
+.edit-win-open-in {
+  transform: scale(0.5);
+}
+.edit-win-open-out {
+  transform: scale(1);
+  animation: edit_win_out 0.5s;
+}
+@keyframes edit_win_out {
+  0% {
+    transform: scale(0.5);
+  }
+  30% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+// --------------  窗口关闭动画
+.edit-win-close-in {
+  transform: scale(1);
+  opacity: 1;
+}
+.edit-win-close-out {
+  transform: scale(0.5);
+  opacity: 0;
+  // animation-direction: reverse;
+  // animation: edit_side_win_out 0.5s;
+}
+
+.edit-wg-sideSelect {
+  @extend %tooltipOffset;
+  @extend %tooltipShow;
+  display: inline-block;
+  color: white;
+  height: #{$wg-h};
+  width: #{$wg-w-long};
+  &:hover .sideBtn {
+    background-color: var(--ed-wg-main-color);
+  }
+  &:hover .sideBtn .text::after {
+    color: white;
+  }
+  .sideBtn {
+    position: relative;
+    @extend %ease-1;
+    color: white;
+    background-color: #{$bg-bg};
+    border: #{$wg-bor};
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    border-radius: #{$wg-bor-r};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    .text {
+      width: #{$wg-w-long - 36};
+      padding-left: 6px;
+      overflow: hidden;
+      height: 16px;
+      &::after {
+        content: "  \f024   ";
+        @extend %icon-right;
+        font-size: 15px;
+        right: -4px;
+        top: 3px;
+      }
+    }
+  }
+}
+#edit-wg-side-select-win {
+  visibility: hidden;
+  position: absolute;
+  width: 310px;
+  height: 200px;
+  border: #{$wg-bor};
+  box-shadow: #{$drop-shadow-0};
+  background-color: #{$win-bg};
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+  @extend %ease-1;
+  @extend %center;
+  border-radius: #{$wg-bor-r};
+  display: flex;
+  flex-direction: column;
+  .edit-side-btn:hover::after {
+    color: white;
+  }
+  .edit-side-title {
+    height: 50px;
+    padding: 0;
+    margin: 0;
+    @extend %center;
+    color: white;
+    font-size: 14px;
+    &::after {
+      content: "  \f024   ";
+      color: var(--ed-wg-main-color);
+      font-family: "FontAwesome";
+      white-space: pre;
+      font-size: 16px;
+    }
+  }
+  .edit-side-btn-cancle,
+  .edit-side-btn-ok {
+    @extend %ease-1;
+    text-align: center;
+    color: white;
+    background-color: #{$bg-bg};
+    border: #{$wg-bor-a};
+    height: 30px;
+    width: 100px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    border-radius: #{$wg-bor-r};
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 10px 0 10px 0;
+  }
+  .edit-side-btn-ok {
+    position: relative;
+    &::before {
+      content: "";
+      white-space: pre;
+    }
+    &::after {
+      content: "     \f00c";
+      @extend %icon-right;
+    }
+    &:hover {
+      color: white;
+      background-color: var(--ed-wg-main-color);
+    }
+    &:hover::after {
+      color: white;
+    }
+  }
+  .edit-side-btn-cancle {
+    position: relative;
+    &::before {
+      content: "";
+      white-space: pre;
+    }
+    &::after {
+      content: "     \f00d";
+      @extend %icon-right;
+    }
+    &:hover {
+      background-color: var(--ed-wg-main-color);
+    }
+    &:hover::after {
+      color: white;
+    }
+  }
+  .wg-side-wrapper {
+    $side-w: 60px;
+    $side-h: 40px;
+    $side-txt-h: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: #{$side-h + $side-txt-h} #{$side-h + $side-txt-h};
+    .ed-side-check {
+      -webkit-appearance: none;
+      width: #{$side-w};
+      height: #{$side-h};
+      background: #{$bg-bg};
+      color: white;
+      padding: 0;
+      margin: 0;
+      outline: none;
+      border: none;
+      text-align: center;
+      @extend %center;
+      @extend %ease-0;
+      background-image: url("../countryTile.png");
+      background-repeat: no-repeat;
+      background-size: 300px auto;
+      background-position: 0px 0px;
+      cursor: pointer;
+      box-sizing: border-box;
+      transform: scale(0.88);
+      filter: grayscale(100%) brightness(150%);
+      opacity: 0.6;
+      &::after {
+        content: attr(data-name);
+        position: absolute;
+        margin-top: #{$side-h + $side-txt-h};
+        height: #{$side-txt-h};
+        width: 60px;
+        padding: 2px 0 2px 0;
+        font-size: 14px;
+        background: #{$bg-bg};
+      }
+      &:checked {
+        filter: grayscale(0%) brightness(100%);
+        opacity: 1;
+      }
+      &:checked::after {
+        background: var(--ed-wg-main-color);
+      }
+      &:hover {
+        border: #{$wg-bor-b};
+        opacity: 1;
+      }
+    }
+    .s-1 {
+      background-position: -180px -40px;
+    }
+    .s-2 {
+      background-position: 0px -40px;
+    }
+    .s-3 {
+      background-position: -60px 0px;
+    }
+    .s-4 {
+      background-position: -120px 0px;
+    }
+    .s-5 {
+      background-position: -180px 0px;
+    }
+    .s-6 {
+      background-position: -60px -40px;
+    }
+    .s-7 {
+      background-position: -240px 0px;
+    }
+    .s-8 {
+      background-position: 0px 0px;
+    }
+    .s-9 {
+      background-position: -120px -40px;
+    }
+    .s-10 {
+      background-position: -240px -40px;
+    }
+  }
+}
+.edit-wg-multiSelect {
+  @extend %tooltipOffset;
+  @extend %tooltipShow;
+  display: inline-block;
+  color: white;
+  height: #{$wg-h};
+  width: #{$wg-w-long};
+  &:hover .multiBtn {
+    background-color: var(--ed-wg-main-color);
+  }
+  &:hover .multiBtn .text::after {
+    color: white;
+  }
+  .multiBtn {
+    position: relative;
+    @extend %ease-1;
+    color: white;
+    background-color: #{$bg-bg};
+    border: #{$wg-bor};
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    border-radius: #{$wg-bor-r};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    .text {
+      width: #{$wg-w-long - 36};
+      padding-left: 6px;
+      overflow: hidden;
+      height: 16px;
+      &::after {
+        content: "  \f0c9   ";
+        @extend %icon-right;
+        right: -4px;
+        top: 2px;
+      }
+    }
+  }
+}
+#edit-wg-multi-select-win {
+  visibility: hidden;
+  $win-h: 400px;
+  $win-w: 300px;
+  position: absolute;
+  width: #{$win-w};
+  height: #{$win-h};
+  border: #{$wg-bor};
+  box-shadow: #{$drop-shadow-0};
+  background-color: #{$win-bg};
+  z-index: 1;
+  padding: 0;
+  margin: 0;
+  @extend %ease-1;
+  @extend %center;
+  border-radius: #{$wg-bor-r};
+  display: flex;
+  flex-direction: column;
+  .edit-multi-btn:hover::after {
+    color: white;
+  }
+  .edit-multi-title {
+    height: 50px;
+    padding: 0;
+    margin: 0;
+    @extend %center;
+    color: white;
+    font-size: 14px;
+    &::after {
+      content: "  \f0c9   ";
+      color: var(--ed-wg-main-color);
+      font-family: "FontAwesome";
+      white-space: pre;
+      font-size: 16px;
+    }
+  }
+  .edit-multi-btn-cancle,
+  .edit-multi-btn-ok {
+    @extend %ease-1;
+    text-align: center;
+    color: white;
+    background-color: #{$bg-bg};
+    border: #{$wg-bor-a};
+    height: 30px;
+    width: 100px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    border-radius: #{$wg-bor-r};
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 10px 0 10px 0;
+  }
+  .edit-multi-btn-ok {
+    position: relative;
+    &::before {
+      content: "";
+      white-space: pre;
+    }
+    &::after {
+      content: "     \f00c";
+      @extend %icon-right;
+    }
+    &:hover {
+      color: white;
+      background-color: var(--ed-wg-main-color);
+    }
+    &:hover::after {
+      color: white;
+    }
+  }
+  .edit-multi-btn-cancle {
+    position: relative;
+    &::before {
+      content: "";
+      white-space: pre;
+    }
+    &::after {
+      content: "     \f00d";
+      @extend %icon-right;
+    }
+    &:hover {
+      background-color: var(--ed-wg-main-color);
+    }
+    &:hover::after {
+      color: white;
+    }
+  }
+  .wg-multi-wrapper {
+    $multi-h: 30px;
+    display: grid;
+    height: 100%;
+    width: #{$win-w - 20};
+    border: #{$wg-bor};
+    border-radius: #{$wg-bor-r};
+    background-color: #{$bg-bg};
+    overflow-x: hidden;
+    overflow-y: scroll;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(auto-fill, #{$multi-h});
+    .ed-multi-check {
+      position: relative;
+      -webkit-appearance: none;
+      width: 100%;
+      height: #{$multi-h};
+      // background: #{$font-c};
+      color: white;
+      padding: 0;
+      margin: 0;
+      outline: none;
+      border: none;
+      text-align: center;
+      @extend %center;
+      @extend %ease-0;
+      cursor: pointer;
+      box-sizing: border-box;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      border-right: 1px solid rgba(255, 255, 255, 0.5);
+      // &:not(:last-child) {
+      //   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      // }
+      &::after {
+        content: attr(data-desc);
+        position: absolute;
+        left: 6px;
+        font-size: 14px;
+        color: #{$font-c};
+      }
+      &::before {
+        font-family: "FontAwesome";
+        content: "";
+        width: 30px;
+        font-size: 20px;
+        top: 4px;
+        height: #{$multi-h - 4};
+        position: absolute;
+        right: 1px;
+      }
+      &:checked::before {
+        content: "\f058";
+        color: white;
+        right: 0px;
+      }
+      &:checked::after {
+        color: white;
+      }
+      &:hover::after {
+        color: white;
+      }
+      // &:hover::before {
+      //   content: "\f058";
+      // }
+      &:checked {
+        background-color: var(--ed-wg-main-color);
+      }
+      &:not(:last-child):checked {
+        border-bottom: 2px solid #{$font-c};
+      }
+      &:hover {
+        background-color: var(--ed-wg-main-color);
+      }
+    }
+    .edit-typeOption {
+      &::before {
+        content: "  \f006   ";
+        font-family: "FontAwesome";
+        color: var(--ed-wg-main-color);
+      }
+    }
+  }
+}
