@@ -25,7 +25,7 @@ const iframeObj = {
 
     switch (status) {
       case "changed":
-        console.log(resetBtn, status, self.dataset.option);
+        //console.log(resetBtn, status, self.dataset.option);
         resetBtn.classList.add("resetBtn-show");
         resetBtn.classList.remove("resetBtn-hidden");
       case "noChange":
